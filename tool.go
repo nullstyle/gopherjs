@@ -890,7 +890,7 @@ package main
 
 import (
 {{if not .TestMain}}
-	"os"
+	"github.com/gopherjs/gopherjs/js"
 {{end}}
 	"regexp"
 	"testing"
@@ -940,7 +940,7 @@ func main() {
 {{with .TestMain}}
 	{{.Package}}.{{.Name}}(m)
 {{else}}
-	os.Exit(m.Run())
+	js.Global.Get("process").Call("exit", m.Run())
 {{end}}
 }
 
